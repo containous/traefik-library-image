@@ -1,9 +1,6 @@
-FROM alpine:edge
+FROM alpine:3.3
 ARG VERSION=dev
-RUN apk --update upgrade \
-  && apk add ca-certificates \
-  && update-ca-certificates \
-  && rm -rf /var/cache/apk/* \
+RUN apk --no-cache --no-progress add ca-certificates \
   && wget https://github.com/emilevauge/traefik/releases/download/$VERSION/traefik \
   && chmod +x traefik
 EXPOSE 80
