@@ -1,6 +1,4 @@
-<p align="center">
-<img src="http://traefik.github.io/traefik.logo.svg" alt="Træfɪk" title="Træfɪk" />
-</p>
+![](https://traefik.io/traefik.logo.svg)
 
 [Træfɪk](https://github.com/containous/traefik) is a modern HTTP reverse proxy and load balancer made to deploy microservices with ease. It supports several backends ([Docker :whale:](https://www.docker.com/), [Swarm :whale::whale:](https://github.com/docker/swarm), [Mesos/Marathon](https://mesosphere.github.io/marathon/), [Consul](https://www.consul.io/), [Etcd](https://coreos.com/etcd/), [Zookeeper](https://zookeeper.apache.org), [BoltDB](https://github.com/boltdb/bolt), Rest API, file...) to manage its configuration automatically and dynamically.
 
@@ -25,8 +23,11 @@ watch = true
 Start Træfɪk:
 
 ```bash
-docker run -d -p 8080:8080 -p 80:80 -v $PWD/traefik.toml:/etc/traefik/traefik.toml -v /var/run/docker.sock:/var/run/docker.sock traefik
-...
+docker run -d -p 8080:8080 -p 80:80 \
+-v $PWD/traefik.toml:/etc/traefik/traefik.toml \
+-v /var/run/docker.sock:/var/run/docker.sock \
+traefik
+```
 
 Start a backend server, named `test`:
 
@@ -56,6 +57,8 @@ X-Forwarded-Server: f2e05c433120
 ```
 
 The web UI [http://localhost:8080](http://localhost:8080) will give you an overview of the frontends/backends and also a health dashboard.
+
+![Web UI Providers](https://traefik.io/web.frontend.png)
 
 # Documentation
 
