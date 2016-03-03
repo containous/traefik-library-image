@@ -1,5 +1,3 @@
-# Træfɪk, a modern reverse proxy
-
 <p align="center">
 <img src="http://traefik.github.io/traefik.logo.svg" alt="Træfɪk" title="Træfɪk" />
 </p>
