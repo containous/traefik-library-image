@@ -1,8 +1,0 @@
-FROM alpine:3.3
-ARG VERSION=dev
-RUN apk --no-cache --no-progress add ca-certificates \
-  && wget https://github.com/emilevauge/traefik/releases/download/$VERSION/traefik \
-  && chmod +x traefik
-EXPOSE 80
-ENTRYPOINT ["/traefik"]
-CMD ["--help"]
