@@ -7,7 +7,7 @@ if [ $# -eq 0 ] ; then
 	exit
 fi
 
-VERSION=$1
+export VERSION=$1
 
 # cd to the current directory so the script can be run from anywhere.
 cd `dirname $0`
@@ -20,5 +20,9 @@ echo "Fetching and building traefik $VERSION..."
 wget -O traefik https://github.com/emilevauge/traefik/releases/download/$VERSION/traefik
 chmod +x traefik
 cp traefik alpine/
+
+echo "Replace $VERSION in Dockerfiles..."
+envsubst < Dockerfile.tmpl > Dockerfile
+envsubst < alpine/Dockerfile.tmpl > alpine/Dockerfile
 
 echo "Done."
