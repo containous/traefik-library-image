@@ -17,7 +17,7 @@ echo "Updating certificates..."
 ./certs/update.sh
 
 echo "Fetching and building traefik $VERSION..."
-wget -O traefik https://github.com/emilevauge/traefik/releases/download/$VERSION/traefik
+wget -O traefik https://github.com/containous/traefik/releases/download/$VERSION/traefik
 chmod +x traefik
 cp traefik alpine/
 
