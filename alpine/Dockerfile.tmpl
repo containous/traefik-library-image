@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.6
 RUN apk --update upgrade \
     && apk --no-cache --no-progress add ca-certificates \
     && rm -rf /var/cache/apk/*
