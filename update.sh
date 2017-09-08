@@ -69,7 +69,7 @@ build_alpine() {
 }
 
 ## From scratch
-#build_from_scratch
+build_from_scratch
 
 ## Alpine
 build_alpine
