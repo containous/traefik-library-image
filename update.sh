@@ -11,7 +11,7 @@ export DOLLAR='$'
 export VERSION=$1
 export ALPINE_VERSION=3.6
 
-CERT_IMAGE="alpine:edge"
+CERT_IMAGE="alpine:3.6"
 
 # cd to the current directory so the script can be run from anywhere.
 cd `dirname $0`
