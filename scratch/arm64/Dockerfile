@@ -9,5 +9,5 @@ LABEL org.label-schema.vendor="Containous" \
       org.label-schema.url="https://traefik.io" \
       org.label-schema.name="Traefik" \
       org.label-schema.description="A modern reverse-proxy" \
-      org.label-schema.version="v1.4.1" \
+      org.label-schema.version="v1.4.2" \
       org.label-schema.docker.schema-version="1.0"
