@@ -1,0 +1,31 @@
+# Check https://stefanscherer.github.io/setup-windows-docker-ci-appveyor/
+# for a clear explanation of the windows build process
+version: 1.0.{build}
+
+platform: x64
+
+# `git clone` takes ages due to the repo's size
+shallow_clone: true
+
+# Environment providing Windows Containers: https://www.appveyor.com/docs/build-environment/#docker
+image:
+- Visual Studio 2017
+
+# Show Windows and docker versions
+install:
+- ps: Write-Host Server version $(gp 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').BuildLabEx
+- docker version
+
+build:
+  verbosity: minimal
+
+build_script:
+- ps: docker build -t traefik:windows ./windows/
+
+test_script:
+- ps: |
+    docker run --name lb -d -p 8080:8080 traefik:windows --api --debug
+    docker ps
+    Invoke-WebRequest -Uri http://localhost:8080
+
+# Thanks https://github.com/StefanScherer for this content!
