@@ -8,7 +8,7 @@ fi
 
 # if our command is a valid Traefik subcommand, let's invoke it through Traefik instead
 # (this allows for "docker run traefik version", etc)
-if traefik "$1" --help 2>&1 >/dev/null | grep "help requested" > /dev/null 2>&1; then
+if traefik "$1" --help | grep -s -q "help"; then
     set -- traefik "$@"
 fi
 
