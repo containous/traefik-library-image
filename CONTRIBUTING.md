@@ -38,6 +38,9 @@ Because of https://github.com/docker-library/official-images/issues/1095.
 
 ## How do you release?
 
+
+### Step 1: Træfik release
+
 The script `update.sh` is called with the Træfik's version to use
 as argument:
 
@@ -47,3 +50,10 @@ bash ./update.sh v1.7.0-rc
 
 This call is done by the main release process here:
 https://github.com/containous/traefik/blob/master/script/deploy.sh#L21.
+
+### Step 2: Pull Request to the official Docker Library
+
+This step is done by an internal bot at Containous.
+It is in charge of automating creation of Pull Requests against https://github.com/docker-library/official-images .
+
+Example of automated Pull Request: https://github.com/docker-library/official-images/pull/4602 .
