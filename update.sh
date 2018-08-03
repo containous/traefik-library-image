@@ -33,12 +33,15 @@ get_traefik_binary_from_platform() {
 
   local DESTINATION_FILE="${DESTINATION_DIR}/traefik"
   local DOWNLOAD_URL="https://github.com/containous/traefik/releases/download/${VERSION}/traefik_${OS}-${ARCH}"
+
   if [ "${OS}" == "windows" ]
   then
     DOWNLOAD_URL+=".exe"
+    DESTINATION_FILE+=".exe"
   fi
 
   pushd "${DESTINATION_DIR}"
+  rm -f "${DESTINATION_FILE}"
   wget -O "${DESTINATION_FILE}" "${DOWNLOAD_URL}"
   chmod +x "${DESTINATION_FILE}"
   popd
@@ -83,7 +86,6 @@ build_from_scratch() {
          envsubst < "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/tmpl.Dockerfile" > "scratch/${ARCH}/Dockerfile"
 
          # Binary
-         rm -f "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH}/traefik"
          get_traefik_binary_from_platform \
           "${VERSION}" \
           "linux" \
@@ -114,7 +116,6 @@ build_alternate_platform alpine
 
 ## Windows
 # Download binary
-rm -f "${SCRIPT_DIRNAME_ABSOLUTEPATH}/windows/traefik"
 get_traefik_binary_from_platform \
  "${VERSION}" \
  "windows" \

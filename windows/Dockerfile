@@ -1,9 +1,6 @@
 FROM microsoft/nanoserver:sac2016
 
-COPY ./traefik /traefik.exe
-
-VOLUME C:/etc/traefik
-VOLUME C:/etc/ssl
+COPY ./traefik.exe /traefik.exe
 
 EXPOSE 80
 ENTRYPOINT ["/traefik"]
