@@ -10,7 +10,7 @@ fi
 
 export DOLLAR='$'
 export VERSION=$1
-export ALPINE_VERSION=3.6
+export ALPINE_VERSION=3.8
 export WINDOWS_VERSION=sac2016
 
 CERT_IMAGE="alpine:3.6"
