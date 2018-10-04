@@ -8,7 +8,7 @@ RUN set -ex; \
 		x86_64) arch='amd64' ;; \
 		*) echo >&2 "error: unsupported architecture: $apkArch"; exit 1 ;; \
 	esac; \
-	wget --quiet -O /usr/local/bin/traefik "https://github.com/containous/traefik/releases/download/v1.7.1/traefik_linux-$arch"; \
+	wget --quiet -O /usr/local/bin/traefik "https://github.com/containous/traefik/releases/download/v1.7.2/traefik_linux-$arch"; \
 	chmod +x /usr/local/bin/traefik
 COPY entrypoint.sh /
 EXPOSE 80
@@ -20,5 +20,5 @@ LABEL org.label-schema.vendor="Containous" \
       org.label-schema.url="https://traefik.io" \
       org.label-schema.name="Traefik" \
       org.label-schema.description="A modern reverse-proxy" \
-      org.label-schema.version="v1.7.1" \
+      org.label-schema.version="v1.7.2" \
       org.label-schema.docker.schema-version="1.0"
