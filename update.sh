@@ -115,12 +115,6 @@ build_from_scratch
 build_alternate_platform alpine
 
 ## Windows
-# Download binary
-get_traefik_binary_from_platform \
- "${VERSION}" \
- "windows" \
- "amd64" \
- "${SCRIPT_DIRNAME_ABSOLUTEPATH}/windows"
 build_alternate_platform windows
 
 echo "Done."
