@@ -1,6 +1,6 @@
 FROM microsoft/nanoserver:sac2016
 
-ADD https://github.com/containous/traefik/releases/download/v1.7.8/traefik_windows-amd64.exe /traefik.exe
+ADD https://github.com/containous/traefik/releases/download/v1.7.9/traefik_windows-amd64.exe /traefik.exe
 
 EXPOSE 80
 ENTRYPOINT ["/traefik"]
@@ -10,5 +10,5 @@ LABEL org.label-schema.vendor="Containous" \
       org.label-schema.url="https://traefik.io" \
       org.label-schema.name="Traefik" \
       org.label-schema.description="A modern reverse-proxy" \
-      org.label-schema.version="v1.7.8" \
+      org.label-schema.version="v1.7.9" \
       org.label-schema.docker.schema-version="1.0"
