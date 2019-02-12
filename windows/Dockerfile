@@ -1,6 +1,6 @@
 FROM microsoft/nanoserver:sac2016
 
-ADD https://github.com/containous/traefik/releases/download/v1.7.9/traefik_windows-amd64.exe /traefik.exe
+COPY ./traefik.exe /traefik.exe
 
 EXPOSE 80
 ENTRYPOINT ["/traefik"]
