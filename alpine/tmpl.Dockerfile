@@ -1,5 +1,5 @@
 FROM alpine:$ALPINE_VERSION
-RUN apk --no-cache add ca-certificates
+RUN apk --no-cache add ca-certificates tzdata
 RUN set -ex; \
 	apkArch="$(apk --print-arch)"; \
 	case "${DOLLAR}apkArch" in \
