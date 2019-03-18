@@ -1,14 +1,16 @@
 FROM alpine:3.8
-RUN apk --no-cache add ca-certificates
+RUN apk --no-cache add ca-certificates tzdata
 RUN set -ex; \
 	apkArch="$(apk --print-arch)"; \
 	case "$apkArch" in \
-		armhf) arch='arm' ;; \
+		armhf) arch='armv7' ;; \
 		aarch64) arch='arm64' ;; \
 		x86_64) arch='amd64' ;; \
 		*) echo >&2 "error: unsupported architecture: $apkArch"; exit 1 ;; \
 	esac; \
-	wget --quiet -O /usr/local/bin/traefik "https://github.com/containous/traefik/releases/download/v1.7.9/traefik_linux-$arch"; \
+	wget --quiet -O /tmp/traefik.tar.gz "https://github.com/containous/traefik/releases/download/v2.0.0-alpha1/traefik_v2.0.0-alpha1_linux_$arch.tar.gz"; \
+	tar xzvf /tmp/traefik.tar.gz -C /usr/local/bin traefik; \
+	rm -f /tmp/traefik.tar.gz; \
 	chmod +x /usr/local/bin/traefik
 COPY entrypoint.sh /
 EXPOSE 80
@@ -20,5 +22,5 @@ LABEL org.label-schema.vendor="Containous" \
       org.label-schema.url="https://traefik.io" \
       org.label-schema.name="Traefik" \
       org.label-schema.description="A modern reverse-proxy" \
-      org.label-schema.version="v1.7.9" \
+      org.label-schema.version="v2.0.0-alpha1" \
       org.label-schema.docker.schema-version="1.0"
