@@ -78,7 +78,7 @@ build_from_scratch() {
     FROM_SCRATCH_ARCH=(
         "amd64"
         "arm64"
-        "armv7"
+        "armv6"
     )
 
     # Update the certificates.
@@ -86,22 +86,22 @@ build_from_scratch() {
     get_certs
 
     for ARCH in "${FROM_SCRATCH_ARCH[@]}" ; do
-        rm -rf "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v7}/"
+        rm -rf "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v6}/"
 
          # Certificates
-         rm -rf "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v7}/certs/"
-         mkdir -p "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v7}/certs/"
-         cp "${CERTS_DIR}/ca-certificates.crt" "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v7}/certs/ca-certificates.crt"
+         rm -rf "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v6}/certs/"
+         mkdir -p "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v6}/certs/"
+         cp "${CERTS_DIR}/ca-certificates.crt" "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v6}/certs/ca-certificates.crt"
 
          # Dockerfile
-         envsubst < "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/tmpl.Dockerfile" > "scratch/${ARCH%v7}/Dockerfile"
+         envsubst < "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/tmpl.Dockerfile" > "scratch/${ARCH%v6}/Dockerfile"
 
          # Binary
          get_traefik_binary_from_platform \
           "${VERSION}" \
           "linux" \
           "${ARCH}" \
-          "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v7}" & # Run in background
+          "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v6}" & # Run in background
     done
     # Since downloads are run in background, we have to wait for all
     # to finish (parallelized downloads)
