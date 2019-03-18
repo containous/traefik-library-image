@@ -31,20 +31,31 @@ get_traefik_binary_from_platform() {
 
   [ -d "${DESTINATION_DIR}" ] || echo "ERROR: ${DESTINATION_DIR} does not exists"
 
-  local DESTINATION_FILE="${DESTINATION_DIR}/traefik"
-  local DOWNLOAD_URL="https://github.com/containous/traefik/releases/download/${VERSION}/traefik_${OS}-${ARCH}"
+	# https://github.com/containous/traefik/releases/download/v2.0.0-alpha1/traefik_v2.0.0-alpha1_freebsd_386.tar.gz
 
-  if [ "${OS}" == "windows" ]
-  then
-    DOWNLOAD_URL+=".exe"
-    DESTINATION_FILE+=".exe"
-  fi
+  local DESTINATION_FILE="${DESTINATION_DIR}/traefik"
+  local DOWNLOAD_URL="https://github.com/containous/traefik/releases/download/${VERSION}/traefik_${VERSION}_${OS}_${ARCH}"
 
   pushd "${DESTINATION_DIR}"
-  rm -f "${DESTINATION_FILE}"
-  wget -O "${DESTINATION_FILE}" "${DOWNLOAD_URL}"
-  chmod +x "${DESTINATION_FILE}"
-  popd
+
+	if [ "${OS}" == "windows" ]
+  then
+  	rm -f "${DESTINATION_FILE}.exe"
+    DOWNLOAD_URL+=".zip"
+	  wget -O "traefik_${VERSION}_${OS}_${ARCH}.zip" "${DOWNLOAD_URL}"
+		unzip "traefik_${VERSION}_${OS}_${ARCH}.zip" traefik.exe
+
+		rm -f "traefik_${VERSION}_${OS}_${ARCH}.zip"
+  else
+  	rm -f "${DESTINATION_FILE}"
+		DOWNLOAD_URL+=".tar.gz"
+	  wget -O "traefik_${VERSION}_${OS}_${ARCH}.tar.gz" "${DOWNLOAD_URL}"
+		tar xzvf "traefik_${VERSION}_${OS}_${ARCH}.tar.gz" traefik
+		rm -f "traefik_${VERSION}_${OS}_${ARCH}.tar.gz"
+		chmod +x traefik
+	fi
+
+	popd
 }
 
 get_certs() {
@@ -67,7 +78,7 @@ build_from_scratch() {
     FROM_SCRATCH_ARCH=(
         "amd64"
         "arm64"
-        "arm"
+        "armv7"
     )
 
     # Update the certificates.
@@ -75,22 +86,22 @@ build_from_scratch() {
     get_certs
 
     for ARCH in "${FROM_SCRATCH_ARCH[@]}" ; do
-        rm -rf "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH}/"
+        rm -rf "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v7}/"
 
          # Certificates
-         rm -rf "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH}/certs/"
-         mkdir -p "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH}/certs/"
-         cp "${CERTS_DIR}/ca-certificates.crt" "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH}/certs/ca-certificates.crt"
+         rm -rf "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v7}/certs/"
+         mkdir -p "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v7}/certs/"
+         cp "${CERTS_DIR}/ca-certificates.crt" "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v7}/certs/ca-certificates.crt"
 
          # Dockerfile
-         envsubst < "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/tmpl.Dockerfile" > "scratch/${ARCH}/Dockerfile"
+         envsubst < "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/tmpl.Dockerfile" > "scratch/${ARCH%v7}/Dockerfile"
 
          # Binary
          get_traefik_binary_from_platform \
           "${VERSION}" \
           "linux" \
           "${ARCH}" \
-          "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH}" & # Run in background
+          "${SCRIPT_DIRNAME_ABSOLUTEPATH}/scratch/${ARCH%v7}" & # Run in background
     done
     # Since downloads are run in background, we have to wait for all
     # to finish (parallelized downloads)

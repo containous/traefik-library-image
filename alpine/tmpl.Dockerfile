@@ -3,12 +3,14 @@ RUN apk --no-cache add ca-certificates tzdata
 RUN set -ex; \
 	apkArch="$(apk --print-arch)"; \
 	case "${DOLLAR}apkArch" in \
-		armhf) arch='arm' ;; \
+		armhf) arch='armv7' ;; \
 		aarch64) arch='arm64' ;; \
 		x86_64) arch='amd64' ;; \
 		*) echo >&2 "error: unsupported architecture: ${DOLLAR}apkArch"; exit 1 ;; \
 	esac; \
-	wget --quiet -O /usr/local/bin/traefik "https://github.com/containous/traefik/releases/download/$VERSION/traefik_linux-${DOLLAR}arch"; \
+	wget --quiet -O /tmp/traefik.tar.gz "https://github.com/containous/traefik/releases/download/${VERSION}/traefik_${VERSION}_linux_${DOLLAR}arch.tar.gz"; \
+	tar xzvf /tmp/traefik.tar.gz -C /usr/local/bin traefik; \
+	rm -f /tmp/traefik.tar.gz; \
 	chmod +x /usr/local/bin/traefik
 COPY entrypoint.sh /
 EXPOSE 80
