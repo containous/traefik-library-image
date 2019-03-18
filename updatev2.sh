@@ -4,13 +4,13 @@ set -e
 set -u # Exit on error when uninitialized variable
 
 if [ $# -eq 0 ] ; then
-	echo "Usage: ./update.sh <traefik tag or branch>"
+	echo "Usage: ./updatev2.sh <traefik tag or branch>"
 	exit
 fi
 
 export DOLLAR='$'
 export VERSION=$1
-export ALPINE_VERSION=3.8
+export ALPINE_VERSION=3.9
 export WINDOWS_VERSION=sac2016
 
 CERT_IMAGE="alpine:${ALPINE_VERSION}"
@@ -30,8 +30,6 @@ get_traefik_binary_from_platform() {
   local DESTINATION_DIR=$4
 
   [ -d "${DESTINATION_DIR}" ] || echo "ERROR: ${DESTINATION_DIR} does not exists"
-
-	# https://github.com/containous/traefik/releases/download/v2.0.0-alpha1/traefik_v2.0.0-alpha1_freebsd_386.tar.gz
 
   local DESTINATION_FILE="${DESTINATION_DIR}/traefik"
   local DOWNLOAD_URL="https://github.com/containous/traefik/releases/download/${VERSION}/traefik_${VERSION}_${OS}_${ARCH}"
@@ -112,11 +110,18 @@ build_from_scratch() {
 
 
 build_alternate_platform() {
-  local PLATFORM_DIR="${SCRIPT_DIRNAME_ABSOLUTEPATH}/$1"
+	local PLATFORM=$1
+  local PLATFORM_DIR="${SCRIPT_DIRNAME_ABSOLUTEPATH}/${PLATFORM}"
   [ -d "${PLATFORM_DIR}" ] # Directory for platform exists as absolute path
 
-  rm -f "${PLATFORM_DIR}/Dockerfile"
-  envsubst < "${PLATFORM_DIR}/tmpl.Dockerfile" > "${PLATFORM_DIR}/Dockerfile"
+	rm -f "${PLATFORM_DIR}/Dockerfile"
+
+	if [ "${PLATFORM}" == "windows" ]
+  then
+		envsubst < "${PLATFORM_DIR}/tmpl.Dockerfile" > "${PLATFORM_DIR}/Dockerfile"
+	else
+		envsubst < "${PLATFORM_DIR}/tmplv2.Dockerfile" > "${PLATFORM_DIR}/Dockerfile"
+	fi
 }
 
 ## From scratch
