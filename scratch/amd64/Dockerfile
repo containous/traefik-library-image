@@ -6,9 +6,9 @@ VOLUME ["/tmp"]
 ENTRYPOINT ["/traefik"]
 
 # Metadata
-LABEL org.label-schema.vendor="Containous" \
-      org.label-schema.url="https://traefik.io" \
-      org.label-schema.name="Traefik" \
-      org.label-schema.description="A modern reverse-proxy" \
-      org.label-schema.version="v2.0.0-alpha3" \
-      org.label-schema.docker.schema-version="1.0"
+LABEL org.opencontainers.image.vendor="Containous" \
+      org.opencontainers.image.url="https://traefik.io" \
+      org.opencontainers.image.title="Traefik" \
+      org.opencontainers.image.description="A modern reverse-proxy" \
+      org.opencontainers.image.version="v2.0.0-alpha4" \
+			org.opencontainers.image.documentation="https://docs.traefik.io"
