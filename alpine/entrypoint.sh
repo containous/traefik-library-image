@@ -8,14 +8,7 @@ fi
 
 # if our command is a valid Traefik subcommand, let's invoke it through Traefik instead
 # (this allows for "docker run traefik version", etc)
-#if traefik "$1" --help | grep -s -q "help"; then
-#    set -- traefik "$@"
-#fi
-
-if [ "version" == "$1" ]; then
-    set -- traefik "$@"
-fi
-if [ "healthcheck" == "$1" ]; then
+if traefik "$1" --help | grep -s -q "help"; then
     set -- traefik "$@"
 fi
 
