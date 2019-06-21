@@ -12,7 +12,7 @@ if traefik "$1" --help >/dev/null 2>&1
 then
     set -- traefik "$@"
 else
-    # echo "= '$1' is not a Traefik command: assuming shell execution."
+    echo "= '$1' is not a Traefik command: assuming shell execution." 1>&2
 fi
 
 exec "$@"
