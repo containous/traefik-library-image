@@ -57,3 +57,8 @@ This step is done by an internal bot at Containous.
 It is in charge of automating creation of Pull Requests against https://github.com/docker-library/official-images .
 
 Example of automated Pull Request: https://github.com/docker-library/official-images/pull/4602 .
+
+## More
+
+[![Official Image Tests (alpine)](https://travis-ci.com/containous/traefik-library-image.svg?branch=master)](https://travis-ci.com/containous/traefik-library-image)
+
