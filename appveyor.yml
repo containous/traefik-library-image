@@ -24,8 +24,8 @@ build_script:
 
 test_script:
 - ps: |
-    docker run --name lb -d -p 8080:8080 traefik:windows --api --debug
+    docker run --name lb -d -p 8080:8080 traefik:windows --api
     docker ps
-    Invoke-WebRequest -Uri http://localhost:8080
+    Invoke-WebRequest -Uri http://localhost:8080 -TimeoutSec 60
 
 # Thanks https://github.com/StefanScherer for this content!
