@@ -61,4 +61,7 @@ Example of automated Pull Request: https://github.com/docker-library/official-im
 ## More
 
 [![Official Image Tests (alpine)](https://travis-ci.com/containous/traefik-library-image.svg?branch=master)](https://travis-ci.com/containous/traefik-library-image)
+[![appveyor Build status](https://ci.appveyor.com/api/projects/status/ahndudkeca1g7qf8/branch/master?svg=true)](https://ci.appveyor.com/project/traefiker/traefik-library-image/branch/master)
+
+
 
