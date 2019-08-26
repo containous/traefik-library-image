@@ -1,7 +1,7 @@
 FROM scratch
-COPY --from=traefik:2.0.0-rc1-alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=traefik:2.0.0-rc1-alpine /usr/share/zoneinfo /usr/share/
-COPY --from=traefik:2.0.0-rc1-alpine /usr/local/bin/traefik /
+COPY --from=traefik:v2.0.0-rc1-alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=traefik:v2.0.0-rc1-alpine /usr/share/zoneinfo /usr/share/
+COPY --from=traefik:v2.0.0-rc1-alpine /usr/local/bin/traefik /
 
 EXPOSE 80
 VOLUME ["/tmp"]
