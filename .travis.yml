@@ -7,12 +7,22 @@ git:
 install:
   - git clone --depth 1 https://github.com/docker-library/official-images.git ~/official-images
 
+env:
+  - PLATFORM=alpine
+  - PLATFORM=scratch
+
 script:
   - |
     (
       set -Eeuo pipefail
       set -x
-      image='traefik-official'
-      docker build -t "$image" ./alpine/
+      image="traefik:${PLATFORM}"
+      docker build -t "${image}" "./${PLATFORM}"
+      # Docker Official Library Tests
       ~/official-images/test/run.sh "$image"
+      # Smoke Test of the image
+      docker run --name lb -d -p 8080:8080 "${image}" --api
+      sleep 2
+      docker ps
+      curl --verbose --fail http://localhost:8080
     )
