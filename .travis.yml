@@ -20,7 +20,7 @@ script:
       # Docker Official Library Tests
       ~/official-images/test/run.sh "$image"
       # Smoke Test of the image
-      docker run --name lb -d -p 8080:8080 "${image}" --api
+      docker run --name lb -d -p 8080:8080 "${image}" --api --api.insecure
       sleep 2
       docker ps
       curl --verbose --fail http://localhost:8080
@@ -32,7 +32,7 @@ script:
       # Docker Official Library Tests
       ~/official-images/test/run.sh "$image"
       # Smoke Test of the image
-      docker run --name lb -d -p 8080:8080 "${image}" --api
+      docker run --name lb -d -p 8080:8080 "${image}" --api --api.insecure
       sleep 2
       docker ps
       curl --verbose --fail http://localhost:8080
