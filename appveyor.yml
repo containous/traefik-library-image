@@ -11,8 +11,6 @@ image:
 
 environment:
   matrix:
-    - PLATFORM: windows-sac2016
-      PLATFORM_DIR: ./windows/sac2016/
     - PLATFORM: windows-1809
       PLATFORM_DIR: ./windows/1809/
 
@@ -20,8 +18,6 @@ environment:
 matrix:
   fast_finish: true
   exclude:
-    - image: Windows Server 2019
-      PLATFORM: windows-sac2016
     - image: Visual Studio 2017
       PLATFORM: windows-1809
 

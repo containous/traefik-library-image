@@ -14,7 +14,6 @@ PLATFORMS=(
 	"alpine"
 	"scratch"
 	"windows/1809"
-	"windows/sac2016"
 )
 
 SCRIPT_DIRNAME_ABSOLUTEPATH="$(cd "$(dirname "$0")" && pwd -P)"
