@@ -29,7 +29,7 @@ build_script:
   - ps: |
       $ErrorActionPreference = 'Stop' # Fail if any instruction fails
       docker build -t traefik:$env:PLATFORM $env:PLATFORM_DIR
-      docker run --name lb -d -p 8080:8080 traefik:$env:PLATFORM --api
+      docker run --name lb -d -p 8080:8080 traefik:$env:PLATFORM --api --api.insecure
       sleep 2
       docker ps
       Invoke-WebRequest -Uri http://localhost:8080 -TimeoutSec 60
