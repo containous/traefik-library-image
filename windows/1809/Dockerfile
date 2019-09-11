@@ -1,15 +1,11 @@
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2019 as core
+FROM mcr.microsoft.com/windows/servercore:1809 as core
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 RUN Invoke-WebRequest \
         -Uri "https://github.com/containous/traefik/releases/download/v2.0.0-rc3/traefik_v2.0.0-rc3_windows_amd64.zip" \
         -OutFile "/traefik.zip"; \
     Expand-Archive -Path "/traefik.zip" -DestinationPath "/" -Force
-
-FROM mcr.microsoft.com/windows/nanoserver:1809
-COPY --from=core /windows/system32/netapi32.dll /windows/system32/netapi32.dll
-COPY --from=core /traefik.exe /traefik.exe
 
 EXPOSE 80
 ENTRYPOINT ["/traefik"]
