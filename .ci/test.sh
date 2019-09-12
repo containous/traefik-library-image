@@ -18,7 +18,8 @@ TARGETS=(
 for target in ${TARGETS[@]}; do
     image="${target%%!*}"
     path="${target##*!}"
-    
+    echo "#### Testing image: ${image}"
+
     docker build -t "${image}" "${path}"
     # Docker Official Library Tests
     ~/official-images/test/run.sh "$image"
