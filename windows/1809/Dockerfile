@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/windows/servercore:1809 as core
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 RUN Invoke-WebRequest \
-    -Uri "https://github.com/containous/traefik/releases/download/v1.7.15/traefik_windows-amd64.exe" \
+    -Uri "https://github.com/containous/traefik/releases/download/v1.7.16/traefik_windows-amd64.exe" \
     -OutFile "/traefik.exe"
 
 EXPOSE 80
@@ -14,5 +14,5 @@ LABEL org.opencontainers.image.vendor="Containous" \
     org.opencontainers.image.url="https://traefik.io" \
     org.opencontainers.image.title="Traefik" \
     org.opencontainers.image.description="A modern reverse-proxy" \
-    org.opencontainers.image.version="v1.7.15" \
+    org.opencontainers.image.version="v1.7.16" \
     org.opencontainers.image.documentation="https://docs.traefik.io"
