@@ -1,11 +1,12 @@
 
-FROM mcr.microsoft.com/windows/servercore:1809 as core
+FROM mcr.microsoft.com/windows/servercore:1809
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 RUN Invoke-WebRequest \
         -Uri "https://github.com/containous/traefik/releases/download/v2.0.0-rc4/traefik_v2.0.0-rc4_windows_amd64.zip" \
         -OutFile "/traefik.zip"; \
-    Expand-Archive -Path "/traefik.zip" -DestinationPath "/" -Force
+    Expand-Archive -Path "/traefik.zip" -DestinationPath "/" -Force; \
+    Remove-Item "/traefik.zip" -Force
 
 EXPOSE 80
 ENTRYPOINT ["/traefik"]
