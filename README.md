@@ -1,4 +1,4 @@
-![](https://docs.traefik.io/img/traefik.logo.png)
+![](https://docs.traefik.io/assets/img/traefik.logo.png)
 
 [Træfɪk](https://github.com/containous/traefik) is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
 Træfik integrates with your existing infrastructure components ([Docker](https://www.docker.com/), [Swarm mode](https://docs.docker.com/engine/swarm/), [Kubernetes](https://kubernetes.io), [Marathon](https://mesosphere.github.io/marathon/), [Consul](https://www.consul.io/), [Etcd](https://coreos.com/etcd/), [Rancher](https://rancher.com), [Amazon ECS](https://aws.amazon.com/ecs), ...) and configures itself automatically and dynamically.
@@ -59,7 +59,7 @@ X-Forwarded-Server: f2e05c433120
 
 The web UI [http://localhost:8080](http://localhost:8080) will give you an overview of the frontends/backends and also a health dashboard.
 
-![Web UI Providers](https://github.com/containous/traefik/blob/master/docs/content/assets/img/dashboard-main.png)
+![Web UI Providers](https://docs.traefik.io/assets/img/webui-dashboard.png)
 
 # Documentation
 
