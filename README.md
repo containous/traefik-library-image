@@ -33,7 +33,7 @@ traefik
 Start a backend server, named `test`:
 
 ```bash
-docker run -d --name test emilevauge/whoami
+docker run -d --name test containous/whoami
 ```
 
 And finally, you can access to your `whoami` server throught Træfɪk, on the domain name `{containerName}.{configuredDomain}`:
