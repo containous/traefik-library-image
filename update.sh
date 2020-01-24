@@ -9,7 +9,7 @@ if [ $# -eq 0 ] ; then
 fi
 
 export VERSION=$1
-export ALPINE_VERSION=3.10
+export ALPINE_VERSION=3.11
 PLATFORMS=(
 	"alpine"
 	"scratch"
