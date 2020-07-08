@@ -7,7 +7,7 @@ RUN Invoke-WebRequest \
     -OutFile "/traefik.exe"
 
 EXPOSE 80
-ENTRYPOINT ["/traefik"]
+CMD ["/traefik"]
 
 # Metadata
 LABEL org.opencontainers.image.vendor="Containous" \

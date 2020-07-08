@@ -9,7 +9,7 @@ RUN Invoke-WebRequest \
     Remove-Item "/traefik.zip" -Force
 
 EXPOSE 80
-ENTRYPOINT ["/traefik"]
+CMD ["/traefik"]
 
 # Metadata
 LABEL org.opencontainers.image.vendor="Containous" \
