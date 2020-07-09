@@ -6,7 +6,9 @@ RUN Invoke-WebRequest \
     -Uri "https://github.com/containous/traefik/releases/download/${VERSION}/traefik_windows-amd64.exe" \
     -OutFile "/traefik.exe"
 
+COPY entrypoint.ps1 /
 EXPOSE 80
+ENTRYPOINT [ "powershell.exe", "/entrypoint.ps1" ]
 CMD ["/traefik"]
 
 # Metadata
