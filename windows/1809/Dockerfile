@@ -1,4 +1,3 @@
-
 FROM mcr.microsoft.com/windows/servercore:1809
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -8,7 +7,9 @@ RUN Invoke-WebRequest \
     Expand-Archive -Path "/traefik.zip" -DestinationPath "/" -Force; \
     Remove-Item "/traefik.zip" -Force
 
+COPY entrypoint.ps1 /
 EXPOSE 80
+ENTRYPOINT [ "powershell.exe", "/entrypoint.ps1" ]
 CMD ["/traefik"]
 
 # Metadata
